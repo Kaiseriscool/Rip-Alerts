@@ -1,6 +1,10 @@
 # Rip-Alerts
 A gmod addon that lets players know what the person they killed lost!
 
+Uses
+
+https://github.com/WilliamVenner/gmsv_reqwest/releases/tag/v3.0.2
+
 
 Discord Part
 
