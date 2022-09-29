@@ -1,5 +1,7 @@
 # Rip-Alerts
-A gmod addon that lets players know what the person they killed lost! \n
+A gmod addon that lets players know what the person they killed lost!
+
+
 Discord Part
 
 
