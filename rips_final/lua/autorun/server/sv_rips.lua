@@ -12,8 +12,8 @@ local Guns_2 = {
 
 util.AddNetworkString("RipAddonTXT")
 hook.Add("DoPlayerDeath", "RipAddon:RIPDamage", function(deadperson, attacker, dmginfo)
-    --if not deadperson or not IsValid(deadperson) or not deadperson:IsPlayer() then return end -- if player not player stop
-    --if not attacker or not IsValid(attacker) or not attacker:IsPlayer() then return end -- if attacker is not player stop
+    if not deadperson or not IsValid(deadperson) or not deadperson:IsPlayer() then return end -- if player not player stop
+    if not attacker or not IsValid(attacker) or not attacker:IsPlayer() then return end -- if attacker is not player stop
     local ripped = ""
     local amt = 0
 
