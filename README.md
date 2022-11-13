@@ -16,7 +16,7 @@ Discord Part
 In Game Part
 
 
-![image](https://user-images.githubusercontent.com/86335834/192914776-b5082e75-67f1-4ab7-8bf0-492a4f501fdc.png)
+![image](https://user-images.githubusercontent.com/86335834/201514792-28d5f0f8-53a2-4e4c-8e67-ec9280c50d61.png)
 
 
 
