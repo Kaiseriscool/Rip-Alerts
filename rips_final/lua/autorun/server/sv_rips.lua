@@ -69,7 +69,7 @@ end
 
 
 hook.Remove("Think", "RipAddon.VersionChecker")
-RipAddon.Version = "0.9"
+RipAddon.Version = "2.0"
 hook.Add("Think", "RipAddon.VersionChecker", function()
 	hook.Remove("Think", "RipAddon.VersionChecker")
 
