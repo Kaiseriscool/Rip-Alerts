@@ -1,13 +1,10 @@
 RipAddon = RipAddon or {}
 
 local Gun_1 = {
-  "weapon_supreme_badtime_bm_gblaster",
-  "amr11"
+  "weapon_pistol",
+  "weapon_357"
 }
 
-local Guns_2 = {
-  "weapon_glock2"
-}
 
 
 util.AddNetworkString("RipAddonTXT")
