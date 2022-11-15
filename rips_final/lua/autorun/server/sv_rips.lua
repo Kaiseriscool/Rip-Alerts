@@ -5,6 +5,12 @@ local Gun_1 = {
   "weapon_357"
 }
 
+local suit = {
+    ["testsuit"] = true,
+}
+
+RipAddon.UseVS_Suit = false -- true means we use it
+
 
 
 util.AddNetworkString("RipAddonTXT")
@@ -63,7 +69,23 @@ function RipAddon.MsgSV(tag, col, msg, ply)
   end
 end
 
+hook.Add("PlayerDeath" , function(deadperson, attacker, dmginfo)
+    if !RipAddon.UseVS_Suit then return end
+    local txt = ""
+    if not deadperson or not IsValid(deadperson) or not deadperson:IsPlayer() then return end -- if player not player stop
+    if not attacker or not IsValid(attacker) or not attacker:IsPlayer() then return end -- if attacker is not player stop
+    if !VectivusSuits:GetPlayerSuit( deadperson, true ) then return end
+    if suit[ VectivusSuits:GetPlayerSuit(deadperson) ] then
+    txt = VectivusSuits:GetPlayerSuit(deadperson)
+    if txt ~= "" then
+        for _, all in pairs(player.GetAll()) do
+            RipAddon.MsgSV("Suit Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. txt, all)
+        end
 
+        local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. txt
+        DiscordMessage("**__Suit Weapon__**", msg3)
+    end
+    end
 
 hook.Remove("Think", "RipAddon.VersionChecker")
 RipAddon.Version = "2.0"
