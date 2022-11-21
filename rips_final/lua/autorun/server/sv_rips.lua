@@ -83,7 +83,7 @@ hook.Add("PlayerDeath" , "VS_SUIT_RIPS" , function(deadperson, attacker, dmginfo
         end
 
         local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. txt
-        DiscordMessage("**__Suit Weapon__**", msg3)
+        DiscordMessage("**__Suit Rips__**", msg3)
     end
     end
 end)
