@@ -5,12 +5,18 @@ local Gun_1 = {
   "weapon_357"
 }
 
-local suit = {
+local vs_suit = {
     ["testsuit"] = true,
 }
 
 RipAddon.UseVS_Suit = false -- true means we use it
 
+local armor6 = {
+    "Name of suit1",
+    "Name of suit2"
+}
+
+RipAddon.UseArmor6 = false -- true means we use it
 
 
 util.AddNetworkString("RipAddonTXT")
@@ -75,7 +81,7 @@ hook.Add("PlayerDeath" , "VS_SUIT_RIPS" , function(deadperson, attacker, dmginfo
     if not deadperson or not IsValid(deadperson) or not deadperson:IsPlayer() then return end -- if player not player stop
     if not attacker or not IsValid(attacker) or not attacker:IsPlayer() then return end -- if attacker is not player stop
     if !VectivusSuits:GetPlayerSuit( deadperson, true ) then return end
-    if suit[ VectivusSuits:GetPlayerSuit(deadperson) ] then
+    if vs_suit[ VectivusSuits:GetPlayerSuit(deadperson) ] then
     txt = VectivusSuits:GetPlayerSuit(deadperson)
     if txt ~= "" then
         for _, all in pairs(player.GetAll()) do
@@ -88,8 +94,28 @@ hook.Add("PlayerDeath" , "VS_SUIT_RIPS" , function(deadperson, attacker, dmginfo
     end
 end)
 
+
+hook.Add("PlayerDeath" , "Armor_6_Rips" , function(deadperson, attacker, dmginfo)
+    if !RipAddon.UseArmor6 then return end
+    local d = Armor:Get(deadperson.armorSuit)
+    local txt = ""
+    if not deadperson or not IsValid(deadperson) or not deadperson:IsPlayer() then return end -- if player not player stop
+    if not attacker or not IsValid(attacker) or not attacker:IsPlayer() then return end -- if attacker is not player stop
+    if !d then return end
+    if table.HasValue(armor6 , d.Name) then
+    txt = d.Name
+    if txt ~= "" then
+        RipAddon.MsgSV("Suit Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. txt)
+
+        local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. txt
+        DiscordMessage("**__Suit Rips__**", msg3)
+    end
+    end
+
+end)
+
 hook.Remove("Think", "RipAddon.VersionChecker")
-RipAddon.Version = "2.2"
+RipAddon.Version = "2.3"
 hook.Add("Think", "RipAddon.VersionChecker", function()
 	hook.Remove("Think", "RipAddon.VersionChecker")
 
