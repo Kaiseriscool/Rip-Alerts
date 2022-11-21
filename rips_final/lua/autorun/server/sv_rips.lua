@@ -69,7 +69,7 @@ function RipAddon.MsgSV(tag, col, msg, ply)
   end
 end
 
-hook.Add("PlayerDeath" , function(deadperson, attacker, dmginfo)
+hook.Add("PlayerDeath" , "VS_SUIT_RIPS" , function(deadperson, attacker, dmginfo)
     if !RipAddon.UseVS_Suit then return end
     local txt = ""
     if not deadperson or not IsValid(deadperson) or not deadperson:IsPlayer() then return end -- if player not player stop
@@ -86,6 +86,7 @@ hook.Add("PlayerDeath" , function(deadperson, attacker, dmginfo)
         DiscordMessage("**__Suit Weapon__**", msg3)
     end
     end
+end)
 
 hook.Remove("Think", "RipAddon.VersionChecker")
 RipAddon.Version = "2.1"
