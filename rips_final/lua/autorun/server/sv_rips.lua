@@ -119,7 +119,7 @@ hook.Add("PlayerDeath" , "Armor_6_Rips" , function(deadperson, attacker, dmginfo
 end)
 
 hook.Remove("Think", "RipAddon.VersionChecker")
-RipAddon.Version = "2.3"
+RipAddon.Version = "2.4"
 hook.Add("Think", "RipAddon.VersionChecker", function()
 	hook.Remove("Think", "RipAddon.VersionChecker")
 
