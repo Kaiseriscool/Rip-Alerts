@@ -9,6 +9,10 @@ local vs_suit = {
     ["testsuit"] = true,
 }
 
+local vs_suit_name = {
+    ["testsuit"] = "Test Suit!",  // the name for the suit
+}
+
 RipAddon.UseVS_Suit = false -- true means we use it
 
 local armor6 = {
@@ -85,10 +89,10 @@ hook.Add("PlayerDeath" , "VS_SUIT_RIPS" , function(deadperson, attacker, dmginfo
     txt = VectivusSuits:GetPlayerSuit(deadperson)
     if txt ~= "" then
         for _, all in pairs(player.GetAll()) do
-            RipAddon.MsgSV("Suit Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. txt, all)
+            RipAddon.MsgSV("Suit Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. vs_suit_name[txt], all)
         end
 
-        local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. txt
+        local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. vs_suit_name[txt]
         DiscordMessage("**__Suit Rips__**", msg3)
     end
     end
