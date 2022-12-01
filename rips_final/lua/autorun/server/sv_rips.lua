@@ -1,3 +1,4 @@
+
 RipAddon = RipAddon or {}
 
 local Gun_1 = {
@@ -37,7 +38,9 @@ hook.Add("DoPlayerDeath", "RipAddon:RIPDamage", function(deadperson, attacker, d
 
         if table.HasValue(Gun_1, v:GetClass()) then
             local name_wep = v:GetPrintName()
-
+            if name_wep == "Scripted Weapon" then
+            name_Wep = v:GetClass()
+            end
             if ripped ~= "" then
                 amt = 2
             end
@@ -57,7 +60,7 @@ hook.Add("DoPlayerDeath", "RipAddon:RIPDamage", function(deadperson, attacker, d
 
     if ripped ~= "" then
         for _, all in pairs(player.GetAll()) do
-            RipAddon.MsgSV("Weapon Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. ripped, all)
+            RipAddon.MsgSV("Weapon Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. ripped)
         end
 
         local msg2 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Weapon Lost: " .. ripped
@@ -119,7 +122,7 @@ hook.Add("PlayerDeath" , "Armor_6_Rips" , function(deadperson, attacker, dmginfo
 end)
 
 hook.Remove("Think", "RipAddon.VersionChecker")
-RipAddon.Version = "3.0"
+RipAddon.Version = "4.0"
 hook.Add("Think", "RipAddon.VersionChecker", function()
 	hook.Remove("Think", "RipAddon.VersionChecker")
 
@@ -134,4 +137,6 @@ hook.Add("Think", "RipAddon.VersionChecker", function()
 		end
 	end)
 end)
+
+
 
