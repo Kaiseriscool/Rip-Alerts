@@ -7,12 +7,9 @@ local Gun_1 = {
 }
 
 local vs_suit = {
-    ["testsuit"] = true,
+    ["testsuit"] = "Test Suit!",
 }
 
-local vs_suit_name = {
-    ["testsuit"] = "Test Suit!",  // the name for the suit
-}
 
 RipAddon.UseVS_Suit = false -- true means we use it
 
@@ -92,10 +89,10 @@ hook.Add("PlayerDeath" , "VS_SUIT_RIPS" , function(deadperson, attacker, dmginfo
     txt = VectivusSuits:GetPlayerSuit(deadperson)
     if txt ~= "" then
         for _, all in pairs(player.GetAll()) do
-            RipAddon.MsgSV("Suit Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. vs_suit_name[txt], all)
+            RipAddon.MsgSV("Suit Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. vs_suit[txt])
         end
 
-        local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. vs_suit_name[txt]
+        local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. vs_suit[txt]
         DiscordMessage("**__Suit Rips__**", msg3)
     end
     end
@@ -122,7 +119,7 @@ hook.Add("PlayerDeath" , "Armor_6_Rips" , function(deadperson, attacker, dmginfo
 end)
 
 hook.Remove("Think", "RipAddon.VersionChecker")
-RipAddon.Version = "4.0"
+RipAddon.Version = "4.1"
 hook.Add("Think", "RipAddon.VersionChecker", function()
 	hook.Remove("Think", "RipAddon.VersionChecker")
 
