@@ -20,6 +20,13 @@ local armor6 = {
 
 RipAddon.UseArmor6 = false -- true means we use it
 
+local vnp_suits = {
+    "Name of suit1",
+    "Name of suit2"
+}
+
+RipAddon.UseVNP = false -- true means we use it
+
 
 util.AddNetworkString("RipAddonTXT")
 hook.Add("DoPlayerDeath", "RipAddon:RIPDamage", function(deadperson, attacker, dmginfo)
@@ -118,8 +125,27 @@ hook.Add("PlayerDeath" , "Armor_6_Rips" , function(deadperson, attacker, dmginfo
 
 end)
 
+hook.Add("PlayerDeath" , "VNP_SUITS" , function(deadperson, attacker, dmginfo)
+    if !RipAddon.UseVNP then return end
+    local d = deadperson:GetSuit()
+    local txt = ""
+    if not deadperson or not IsValid(deadperson) or not deadperson:IsPlayer() then return end -- if player not player stop
+    if not attacker or not IsValid(attacker) or not attacker:IsPlayer() then return end -- if attacker is not player stop
+    if !d then return end
+    if table.HasValue(vnp_suits , d.Name) then
+    txt = d.Name
+    if txt ~= "" then
+        RipAddon.MsgSV("Suit Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. txt)
+
+        local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. txt
+        DiscordMessage("**__Suit Rips__**", msg3)
+    end
+    end
+
+end)
+
 hook.Remove("Think", "RipAddon.VersionChecker")
-RipAddon.Version = "4.1"
+RipAddon.Version = "4.2"
 hook.Add("Think", "RipAddon.VersionChecker", function()
 	hook.Remove("Think", "RipAddon.VersionChecker")
 
