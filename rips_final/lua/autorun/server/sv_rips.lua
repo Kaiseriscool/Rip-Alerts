@@ -99,8 +99,8 @@ hook.Add("PlayerDeath" , "VS_SUIT_RIPS" , function(deadperson, attacker, dmginfo
             RipAddon.MsgSV("Suit Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. vs_suit[txt])
         end
 
-        local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. vs_suit[txt]
-        DiscordMessage("**__Suit Rips__**", msg3)
+        --local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. vs_suit[txt]
+       sendDiscordMessage(tostring(attacker:Nick().."("..attacker:SteamID()..")"), tostring(deadperson:Nick().."("..deadperson:SteamID()..")"), totring(vs_suit[txt]))
     end
     end
 end)
