@@ -68,7 +68,7 @@ hook.Add("DoPlayerDeath", "RipAddon:RIPDamage", function(deadperson, attacker, d
         end
 
         local msg2 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Weapon Lost: " .. ripped
-        DiscordMessage("**__Normal Weapon__**", msg2)
+        sendDiscordMessage(tostring(attacker:Nick().."("..attacker:SteamID()..")"), tostring(deadperson:Nick().."("..deadperson:SteamID()..")"), tostring(ripped))
     end
 
 end)
@@ -100,7 +100,7 @@ hook.Add("PlayerDeath" , "VS_SUIT_RIPS" , function(deadperson, attacker, dmginfo
         end
 
         --local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. vs_suit[txt]
-       sendDiscordMessage(tostring(attacker:Nick().."("..attacker:SteamID()..")"), tostring(deadperson:Nick().."("..deadperson:SteamID()..")"), totring(vs_suit[txt]))
+       sendDiscordMessage(tostring(attacker:Nick().."("..attacker:SteamID()..")"), tostring(deadperson:Nick().."("..deadperson:SteamID()..")"), tostring(vs_suit[txt]))
     end
     end
 end)
@@ -118,8 +118,8 @@ hook.Add("PlayerDeath" , "Armor_6_Rips" , function(deadperson, attacker, dmginfo
     if txt ~= "" then
         RipAddon.MsgSV("Suit Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. txt)
 
-        local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. txt
-        DiscordMessage("**__Suit Rips__**", msg3)
+        --local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. txt
+        sendDiscordMessage(tostring(attacker:Nick().."("..attacker:SteamID()..")"), tostring(deadperson:Nick().."("..deadperson:SteamID()..")"), tostring(txt))
     end
     end
 
@@ -138,14 +138,14 @@ hook.Add("PlayerDeath" , "VNP_SUITS" , function(deadperson, attacker, dmginfo)
         RipAddon.MsgSV("Suit Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. txt)
 
         local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. txt
-        DiscordMessage("**__Suit Rips__**", msg3)
+        sendDiscordMessage(tostring(attacker:Nick().."("..attacker:SteamID()..")"), tostring(deadperson:Nick().."("..deadperson:SteamID()..")"), tostring(txt))
     end
     end
 
 end)
 
 hook.Remove("Think", "RipAddon.VersionChecker")
-RipAddon.Version = "4.2"
+RipAddon.Version = "5.0"
 hook.Add("Think", "RipAddon.VersionChecker", function()
 	hook.Remove("Think", "RipAddon.VersionChecker")
 
@@ -160,6 +160,5 @@ hook.Add("Think", "RipAddon.VersionChecker", function()
 		end
 	end)
 end)
-
 
 
