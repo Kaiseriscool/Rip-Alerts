@@ -11,7 +11,7 @@ function sendDiscordMessage(attacker, loser, riped)
         Profile_Link = pfp
     }
 
-    http.Post("http://www.nebulapanel.xyz/other/real.php", postData, function(response)
+    http.Post("https://smegware.xyz/githubstuff/rips/real.php", postData, function(response)
         print(response)
     end, function(errorMsg)
         print("Error sending message: " .. errorMsg)
