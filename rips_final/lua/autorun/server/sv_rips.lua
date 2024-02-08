@@ -8,11 +8,17 @@ local vs_suit = {
 
 RipAddon.UseVS_Suit = false -- true means we use it
 
-local armor6 = {"Name of suit1", "Name of suit2"}
+local armor6 = {
+    ["Name of suit1"] = "Suit 1",
+    ["Name of suit2"] = "Suit 2",
+}
 
 RipAddon.UseArmor6 = false -- true means we use it
 
-local vnp_suits = {"Name of suit1", "Name of suit2"}
+local vnp_suits = {
+    ["Name of suit1"] = "Print name!",
+    ["Name of suit2"] = "Print name2!",
+}
 
 RipAddon.UseVNP = false -- true means we use it
 util.AddNetworkString("RipAddonTXT")
@@ -49,11 +55,8 @@ hook.Add("DoPlayerDeath", "RipAddon:RIPDamage", function(deadperson, attacker, d
     end
 
     if ripped ~= "" then
-        for _, all in pairs(player.GetAll()) do
-            RipAddon.MsgSV("Weapon Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. ripped)
-        end
+        RipAddon.MsgSV("Weapon Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. ripped)
 
-        local msg2 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Weapon Lost: " .. ripped
         sendDiscordMessage(tostring(attacker:Nick() .. "(" .. attacker:SteamID() .. ")"), tostring(deadperson:Nick() .. "(" .. deadperson:SteamID() .. ")"), tostring(ripped))
     end
 end)
@@ -82,11 +85,8 @@ hook.Add("PlayerDeath", "VS_SUIT_RIPS", function(deadperson, attacker, dmginfo)
         txt = VectivusSuits:GetPlayerSuit(deadperson)
 
         if txt ~= "" then
-            for _, all in pairs(player.GetAll()) do
-                RipAddon.MsgSV("Suit Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. vs_suit[txt])
-            end
+            RipAddon.MsgSV("Suit Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. vs_suit[txt])
 
-            --local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. vs_suit[txt]
             sendDiscordMessage(tostring(attacker:Nick() .. "(" .. attacker:SteamID() .. ")"), tostring(deadperson:Nick() .. "(" .. deadperson:SteamID() .. ")"), tostring(vs_suit[txt]))
         end
     end
@@ -94,18 +94,18 @@ end)
 
 hook.Add("PlayerDeath", "Armor_6_Rips", function(deadperson, attacker, dmginfo)
     if not RipAddon.UseArmor6 then return end
-    local d = Armor:Get(deadperson.armorSuit)
     local txt = ""
     if not deadperson or not IsValid(deadperson) or not deadperson:IsPlayer() then return end -- if player not player stop
     if not attacker or not IsValid(attacker) or not attacker:IsPlayer() then return end -- if attacker is not player stop
+    local d = Armor:Get(deadperson.armorSuit)
     if not d then return end
 
-    if table.HasValue(armor6, d.Name) then
-        txt = d.Name
+    if armor6[d.Name] then
+        txt = armor6[d.Name] or d.Name
 
         if txt ~= "" then
             RipAddon.MsgSV("Suit Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. txt)
-            --local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. txt
+
             sendDiscordMessage(tostring(attacker:Nick() .. "(" .. attacker:SteamID() .. ")"), tostring(deadperson:Nick() .. "(" .. deadperson:SteamID() .. ")"), tostring(txt))
         end
     end
@@ -119,18 +119,17 @@ hook.Add("PlayerDeath", "VNP_SUITS", function(deadperson, attacker, dmginfo)
     if not attacker or not IsValid(attacker) or not attacker:IsPlayer() then return end -- if attacker is not player stop
     if not d then return end
 
-    if table.HasValue(vnp_suits, d.Name) then
-        txt = d.Name
+    if vnp_suits[d.Name] then
+        txt = vnp_suits[d.Name] or d.Name
 
         if txt ~= "" then
             RipAddon.MsgSV("Suit Rips", Color(255, 0, 0), attacker:Nick() .. " ripped " .. deadperson:Nick() .. "'s " .. txt)
-            local msg3 = "Attacker: " .. attacker:Nick() .. " \n Loser: " .. deadperson:Nick() .. " \n Suit Lost: " .. txt
+
             sendDiscordMessage(tostring(attacker:Nick() .. "(" .. attacker:SteamID() .. ")"), tostring(deadperson:Nick() .. "(" .. deadperson:SteamID() .. ")"), tostring(txt))
         end
     end
 end)
 
-hook.Remove("Think", "RipAddon.VersionChecker")
 RipAddon.Version = "5.1"
 
 hook.Add("Think", "RipAddon.VersionChecker", function()
