@@ -131,7 +131,7 @@ hook.Add("PlayerDeath", "VNP_SUITS", function(deadperson, attacker, dmginfo)
 end)
 
 hook.Remove("Think", "RipAddon.VersionChecker")
-RipAddon.Version = "5.0"
+RipAddon.Version = "5.1"
 
 hook.Add("Think", "RipAddon.VersionChecker", function()
     hook.Remove("Think", "RipAddon.VersionChecker")
